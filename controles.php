@@ -32,7 +32,57 @@
 					return $controles;
 
 			}
+			/* Obtener una falla*/
+			public function obtener(string $falla,string $control){
+				$this->falla=$falla;
+				$this->Ncontrol=$control;
+	
+				$sql="SELECT COUNT(gt.name) as total FROM glpi_tickets gt WHERE gt.name = ? AND gt.id IN
+				(SELECT git.tickets_id FROM glpi_items_tickets git WHERE git.items_id= ANY
+				  (SELECT gp1.id FROM glpi_peripherals gp1 WHERE gp1.name= ? ))";
+				
+				$arrWhere=array($this->falla,$this->Ncontrol);
+				$query=$this->conexion->prepare($sql);
+				 
+				$query->execute($arrWhere);
+				$request=$query->fetchall(PDO::FETCH_ASSOC);
+				
+				
+				return $request;
+				}
+				/*obtener varias fallas */ 
+				public function obtenerVarias(string $falla,string $control){
+					$this->falla=$falla;
+					$this->Ncontrol=$control;
+					$sql="SELECT gt.name AS 'Falla' FROM glpi_tickets gt INNER JOIN glpi_items_tickets git ON git.tickets_id=gt.id 
+					INNER JOIN glpi_peripherals gp ON gp.id =git.items_id WHERE gp.name = ? ";
 
+					$arrWhere=array($this->Ncontrol);
+					$query=$this->conexion->prepare($sql);
+					
+					$query->execute($arrWhere);
+					$result=$query->fetchall(PDO::FETCH_ASSOC);
+					$falla=0;
+					if ($falla =='F08-F11'){
+						foreach($result as $fila){
+							if($fila['Falla']=='F08' or $fila['Falla']=='F09' or $fila['Falla']=='F10' or $fila['Falla']=='F11')
+							{
+								$falla=$falla+1;
+								
+							}
+						}
+					}elseif($falla =='F12-F15'){
+						foreach($result as $fila){
+							if($fila['Falla']=='F12' or $fila['Falla']=='F13' or $fila['Falla']=='F14' or $fila['Falla']=='F15')
+							{
+								$falla=$falla+1;
+								
+							}
+					}
+					}
+					return $falla;
+				}
+				
 		public function getFallas(string $falla, string $control){
 				$this->falla=$falla;
 				$this->Ncontrol=$control;
@@ -101,6 +151,20 @@
 			return $del;
 		}
 
-
 	}
+
+	/*$controles=new Controles();
+	$array_controles=$controles->obtenerVarias("F08-F11","M62");
+	$falla=0;
+	foreach($array_controles as $fila){
+		
+		if($fila['Falla']=='F08' or $fila['Falla']=='F09' or $fila['Falla']=='F10' or $fila['Falla']=='F11'){
+			$falla=$falla+1;
+			echo $fila['Falla']. "<br>";
+		}
+		
+		
+	};
+	echo "suma de fallas = ".$falla;
+	*/
  ?>

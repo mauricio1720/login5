@@ -1,0 +1,297 @@
+/*
+SoFresh! bookmarklet
+https://sofresh.redpik.net/
+
+Author: Redpik
+Author URI: https://www.redpik.net
+*/
+
+
+
+/* Reset */
+* { margin: 0; padding: 0; }
+
+:focus {/* remember to define focus styles! */
+	outline: none;
+}
+body {
+	background: #fff url(bg.png);
+	border-top: 3px solid #e7b72f;
+}
+ol, ul {
+	list-style: none;
+}
+table {/* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th, td {
+	font-weight: normal;
+	text-align: left;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+a img {
+	border: 0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+
+::-moz-selection { background: #736157; color: #fff; }
+::selection      { background: #736157; color: #fff; }
+
+
+
+
+
+
+
+/* =Structure
+----------------------------------------------- */
+
+body {
+	color: #373737;
+	font: 300 14px/1.35 "Helvetica Neue", Helvetica, Arial, sans-serif;
+	cursor: default;
+}
+
+
+
+#main {
+	clear: both;
+	max-width: 660px;
+	padding: 0 10px;
+	margin: 0 auto;
+}
+
+
+.entry-content p {
+	margin-bottom: 0.6em;
+}
+
+
+
+.clear { display: block; clear: both; }
+br.clear { height: 0; overflow: hidden; }
+
+.hidden { display: none; }
+
+
+
+/* =Global
+----------------------------------------------- */
+
+a { color: #000; }
+a:focus,
+a:active,
+a:hover {
+	color: #000;
+}
+
+/* Headings */
+h1,h2,h3,h4 {
+	clear: both;
+	font-family: 'Courgette', serif;
+}
+
+
+
+
+
+
+/* =Menu
+-------------------------------------------------------------- */
+
+#access {
+	background: #e7b72f;
+	clear: both;
+	display: block;
+	height: 28px;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+}
+#access ul {
+	font-size: 12px;
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+	float: right;
+}
+#access li {
+	float: left;
+}
+#access a {
+	color: #fff;
+	display: block;
+	line-height: 2em;
+	padding: 0 1.2125em;
+	text-decoration: underline;
+}
+
+#access li:hover > a,
+#access a:focus {
+	color: #373737;
+}
+
+
+
+
+
+/* =Header (branding)
+----------------------------------------------- */
+
+#branding {
+	background: transparent url(sofresh.png) no-repeat 50% 84px;
+	padding-bottom: 5em;
+}
+
+#site-title {
+	text-decoration: none;
+	display: block;
+	height: 190px;
+}
+#site-title span { display: none; }
+
+#site-description {
+	text-align: center;
+	text-indent: -30px;
+	font-size: 13px;
+	color: #999;
+	font-weight: 400;
+}
+
+
+
+
+
+/* =Content
+----------------------------------------------- */
+
+.hentry {
+	clear: both;
+	padding-bottom: 48px;
+}
+
+.entry-title {
+	clear: both;
+	color: #E9B730;
+	font-size: 38px;
+	padding-bottom: 0.4em;
+	text-shadow:	1px 1px 0 #fff,
+					1px 1px 3px rgba(0,0,0,0.15);
+}
+
+.hentry a {
+	text-decoration: none;
+	background-color: #736157;
+	color: #fff;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: 1px;
+}
+.hentry a:hover { background-color: #3D3029; }
+
+.hentry h4 { font-size: 18px; color: #444; }
+
+.hentry kbd { border-bottom: 1px dotted #666; cursor: help; }
+
+.hentry .addthis_toolbox a { padding: 0; background-color: transparent; }
+
+.entry-endessous {clear: both; padding-top: 10px; text-align: center; }
+
+
+
+#spreadtheworld { clear: both; width: 330px; height: 30px; margin: 0 auto; }
+#spreadtheworld > div {
+	float: left;
+	padding: 0 10px;
+	width: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+
+
+/*******************************************
+ * 				FOOTER
+ *******************************************/
+
+#colophon {
+	clear: both;
+	margin: 60px auto 15px auto;
+	max-width: 660px;
+	padding: 18px 0;
+	background: transparent url(footer.png);
+	border-radius: 3px;
+	border: 1px dashed #ccc;
+	box-shadow: inset 0 0 1px 2px #fff;
+	color: #555;
+	text-shadow: 1px 1px 0 #fff;
+}
+#colophon > div { line-height: 15px; padding-left: 15px; }
+
+
+
+
+#cabaroc {
+	display: block;
+	float: right;
+	padding-right: 55px;
+	margin-right: 15px;
+	background: transparent url(cabaroc.png) no-repeat right center;
+	height: 15px;
+	line-height: 15px;
+	text-decoration: none;
+	color: #333;
+}
+#cabaroc span { display: none; }
+
+
+
+
+#bt_bookmarket a,
+#bt_bookmarket a:hover {
+	display: block;
+	margin: 0 auto;
+	height: 58px;
+	background: transparent url(sofresh-1.0.png) no-repeat center center;
+	padding: 0;
+}
+#bt_bookmarket a span { display: none; }
+
+
+
+
+
+a.dsq-brlink { display: none; }
+
+
+
+
+/*******************************************
+ * 				RESPONSIVE
+ *******************************************/
+
+/*
+@media only screen and (max-width: 980px) {
+	#main,
+	#access div.menu {
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#main {
+		padding: 0 10px;
+	}
+}
+*/
