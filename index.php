@@ -1,113 +1,92 @@
-<?php 
-	include "controles.php";
-	$controles=new Controles();
-	$array_controles=$controles->getControles();
- ?>
- <!DOCTYPE html>
- <html lang="en">
- <head>
- 	<meta charset="UTF-8">
-	 <title>Login</title>
-	 <link rel="stylesheet" type="text/css" href="css/estilos.css?rnd=132">
-	 <script type="text/css" src="js/reload.js"></script>
- </head>
- <body>
-	 
-	 <div class="contenedor"> 
-	 <table>
-		 <thead>
-	 	
-		 <th>num</th><th>Control</th><th>Tipo</th><th>Sucursal</th>
-		 <th>F01</th>
-		 <th>F02</th>
-		 <th>F03</th>
-		 <th>F04</th>
-		 <th>F05</th>
-		 <th>F06</th>
-		 <th>F07</th>
-		 <th>F08-F11</th>
-		 <th>F12-F15</th>
-		 <th><p>F16</p> <p>LS</p> </th>
-		 <th><p>F17</p> <p>RS</p> </th>
-		 <th><p>F18</p> <p>Boton Home</p></th>
-		 <th><p>F19</p> <p>Sync up</p> </th>
-		 <th>F20<p>Bumper Roto</p> </th>
-		 <th><p>F41</p> <p>Jack 3.5</p> </th>
-		 
-		 </thead>
-		 <?php 
-		 $n=0;
-	 	foreach($array_controles as $fila){
-			$n++;
-		echo "<tr><td>".$n."</td>
-		<td>".$fila['control']."</td>
-		<td>".$fila['tipo']."</td>
-		<td>".$fila['sucursal']."</td>
-			<td>";
-			$res=$controles->obtener("F01",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-			echo "</td><td>";
-			$res=$controles->obtener("F02",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			
-			echo"</td>";
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="">
+    <title>Grafico</title>
+  </head>
+  <body>
+        <div class="col-lg-12" style="padding-top:20px;">
+            <div class="card">
+            <div class="card-header">
+                Grafico
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary" onclick="CargarDatosGraficoBar()">Grafico Bar</button>
+                    </div>
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                </div>
+                <a href="#" class="btn btn-primary">Go</a>
+            </div>
+            </div>
+        </div>
+        
 
-			echo "<td>";
-			$res=$controles->obtener("F03",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			
-			echo"</td><td>";
-			$res=$controles->obtener("F04",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			
-			echo"</td>
-			<td>";
-			$res=$controles->obtener("F05",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			
-			echo"</td><td>";
-			$res=$controles->obtener("F06",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
+    
+    </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.0-alpha/Chart.esm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.0-alpha/Chart.min.js"></script>
 
-			echo"</td>
-			<td>";
-			$res=$controles->obtener("F07",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
+  <script>
+      var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+      function CargarDatosGraficoBar(){
+          $.ajax({
+                url:'controlador_grafico.php',
+                type:'POST',
 
-			echo"</td>
-			<td>";
-			echo $res=$controles->obtenerVarias("F08-F11",$fila['control']);			
-			echo"</td>
+          }           
+          ).done(function(resp){
+              var data= JSON.parse(resp);
+            alert(data[0]);
+          })
 
-			<td>";
-			echo $res=$controles->obtenerVarias("F12-F15",$fila['control']);
-			echo"</td>
-			<td>";			
-			$res=$controles->obtener("F16",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			echo"</td><td>";
-			$res=$controles->obtener("F17",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			echo "</td><td>";
-			$res=$controles->obtener("F18",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}	
-			echo "</td><td>";
-			$res=$controles->obtener("F19",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			echo "</td><td>";
-			$res=$controles->obtener("F20",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			echo "</td><td>";
-			$res=$controles->obtener("F41",$fila['control']);
-			foreach($res as $dato){echo $dato['total'];}
-			echo"</td></tr>";
-		
-													 }
-			  ?>
-			  </table>
-	 </div>
- 		
- 	
- </body>
- </html>
+      }
+      
+  </script>
